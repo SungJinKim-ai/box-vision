@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Vision - 이미지 학습</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Box Vision</h1>
+            <div class="stream-control">
+                <button id="stream-toggle" class="btn control-btn">
+                    <span class="status-text">스트림 중지</span>
+                </button>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">실시간 검출</a></li>
+                    <li><a href="/training" class="active">이미지 학습</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="video-panel">
+                <div class="video-container">
+                    <img id="video-stream" src="{{ url_for('video_feed') }}" alt="비디오 스트림">
+                    <button id="capture-btn" class="btn primary-btn">이미지 캡처</button>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <div class="preview-section">
+                    <h2>캡처된 이미지</h2>
+                    <div class="preview-image">
+                        <img id="captured-image" src="{{ url_for('static', filename='img/placeholder.png') }}" alt="캡처된 이미지">
+                    </div>
+                </div>
+
+                <div class="training-section">
+                    <h2>데이터 입력</h2>
+                    <form id="training-form">
+                        <div class="form-group">
+                            <fieldset>
+                                <legend>병 유형</legend>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="bottle-type" value="소형" required>
+                                        <span>소형</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="bottle-type" value="중형">
+                                        <span>중형</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="bottle-type" value="대형">
+                                        <span>대형</span>
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="form-group">
+                            <fieldset>
+                                <legend>오염도</legend>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="contamination-level" value="깨끗함" required>
+                                        <span>깨끗함</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="contamination-level" value="약간 오염">
+                                        <span>약간 오염</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="contamination-level" value="심한 오염">
+                                        <span>심한 오염</span>
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" id="save-sample-btn" class="btn primary-btn" disabled>저장</button>
+                            <button type="button" id="train-model-btn" class="btn secondary-btn">학습</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="stats-section">
+                    <h2>학습 데이터 통계</h2>
+                    <div class="stats-content">
+                        <div class="stats-row">
+                            <span class="stats-label">총 샘플 수:</span>
+                            <span id="total-samples" class="stats-value">0</span>
+                        </div>
+                        <div class="stats-group">
+                            <h3>병 유형별</h3>
+                            <div class="stats-row">
+                                <span class="stats-label">소형:</span>
+                                <span id="small-bottle-count" class="stats-value">0</span>
+                            </div>
+                            <div class="stats-row">
+                                <span class="stats-label">중형:</span>
+                                <span id="medium-bottle-count" class="stats-value">0</span>
+                            </div>
+                            <div class="stats-row">
+                                <span class="stats-label">대형:</span>
+                                <span id="large-bottle-count" class="stats-value">0</span>
+                            </div>
+                        </div>
+                        <div class="stats-group">
+                            <h3>오염도별</h3>
+                            <div class="stats-row">
+                                <span class="stats-label">깨끗함:</span>
+                                <span id="clean-count" class="stats-value">0</span>
+                            </div>
+                            <div class="stats-row">
+                                <span class="stats-label">약간 오염:</span>
+                                <span id="slightly-contaminated-count" class="stats-value">0</span>
+                            </div>
+                            <div class="stats-row">
+                                <span class="stats-label">심한 오염:</span>
+                                <span id="heavily-contaminated-count" class="stats-value">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="notification" class="notification hidden"></div>
+    <script src="{{ url_for('static', filename='js/training.js') }}"></script>
+</body>
+</html> 

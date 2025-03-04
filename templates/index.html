@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Vision - 실시간 객체 인식</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Box Vision</h1>
+            <div class="stream-control">
+                <button id="stream-toggle" class="btn control-btn">
+                    <span class="status-text">스트림 중지</span>
+                </button>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/" class="active">실시간 검출</a></li>
+                    <li><a href="/training">이미지 학습</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <div class="video-container">
+                <img src="{{ url_for('video_feed') }}" alt="실시간 비디오 피드" id="video-feed">
+                <div class="controls">
+                    <button id="snapshot-btn" class="btn">스냅샷 저장</button>
+                </div>
+            </div>
+            
+            <div class="info-panel">
+                <div class="stats-container">
+                    <h2>통계 정보</h2>
+                    <div id="stats">
+                        <p>총 감지 객체: <span id="total-detections">0</span></p>
+                        <p>처리된 프레임: <span id="frames-processed">0</span></p>
+                        <p>평균 FPS: <span id="avg-fps">0</span></p>
+                        <p>실행 시간: <span id="elapsed-time">0</span>초</p>
+                    </div>
+                </div>
+                
+                <div class="abnormal-detection">
+                    <h2>병(Bottle) 정상/비정상 감지</h2>
+                    <div class="abnormal-stats">
+                        <p class="normal">정상 병: <span id="normal-count">0</span></p>
+                        <p class="abnormal">비정상 병: <span id="abnormal-count">0</span></p>
+                    </div>
+                </div>
+                
+                <div class="bottle-classification">
+                    <h2>병 유형 및 오염도 분류</h2>
+                    <div class="classification-container">
+                        <div class="bottle-types">
+                            <h3>병 유형</h3>
+                            <div id="bottle-types-list">
+                                <p>소형: <span id="small-bottle-count">0</span></p>
+                                <p>중형: <span id="medium-bottle-count">0</span></p>
+                                <p>대형: <span id="large-bottle-count">0</span></p>
+                            </div>
+                        </div>
+                        <div class="contamination-levels">
+                            <h3>오염도</h3>
+                            <div id="contamination-levels-list">
+                                <p>깨끗함: <span id="clean-count">0</span></p>
+                                <p>약간 오염: <span id="slightly-contaminated-count">0</span></p>
+                                <p>심한 오염: <span id="heavily-contaminated-count">0</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detection-counts">
+                    <h2>객체 감지 횟수</h2>
+                    <div id="detection-counts-list"></div>
+                </div>
+                
+                <div class="snapshots">
+                    <h2>최근 스냅샷</h2>
+                    <div id="snapshots-container"></div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Box Vision - YOLOv8 기반 객체 인식 시스템</p>
+        </footer>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 

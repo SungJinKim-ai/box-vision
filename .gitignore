@@ -1,0 +1,65 @@
+# Python 바이트 코드 파일
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 가상 환경
+venv/
+env/
+ENV/
+box-env/
+
+# 배포 파일
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+bin/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+
+# 로그 파일
+*.log
+logs/
+
+# 데이터베이스 파일
+*.db
+*.sqlite3
+
+# 캡처된 이미지 및 학습 데이터
+static/captures/
+static/img/temp_*
+data/samples/
+data/models/
+
+# 임시 파일
+.DS_Store
+.env
+.venv
+.coverage
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# IDE 설정 파일
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# 개인 설정 파일
+config_local.py 
